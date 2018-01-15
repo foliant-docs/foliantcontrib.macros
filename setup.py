@@ -12,7 +12,7 @@ except FileNotFoundError:
 
 
 setup(
-    name='foliantcontrib.flags',
+    name='foliantcontrib.macros',
     description=SHORT_DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     version='1.0.0',
