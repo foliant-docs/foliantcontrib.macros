@@ -25,7 +25,7 @@ class Preprocessor(BasePreprocessor):
             name = options['name']
 
             params = [
-                param.lower()
+                param
                 for param in re.split(self._param_delimiters, options.get('params', ''))
                 if param
             ]
