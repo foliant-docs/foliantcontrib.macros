@@ -25,6 +25,21 @@ preprocessors:
 
 ## Usage
 
+Here's the simplest usecase for macros:
+
+```yaml
+preprocessors:
+  - macros:
+      macros:
+        support_number: "8 800 123-45-67"
+```
+
+Now, everytime you need to insert your support phone number, you put a macro instead:
+
+```markdown
+Call you support team: <<macro name="support_number"></macro>.
+```
+
 Macros are useful in documentation that should be built into multiple targets, e.g. site and pdf, when the same thing is done differently in one target than in the other.
 
 For example, to reference a page in MkDocs, you just put the Markdown file in the link:
