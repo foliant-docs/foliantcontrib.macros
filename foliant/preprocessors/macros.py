@@ -1,5 +1,3 @@
-import re
-
 from foliant.preprocessors.base import BasePreprocessor
 
 
@@ -8,8 +6,6 @@ class Preprocessor(BasePreprocessor):
         'macros': {}
     }
     tags = 'macro',
-
-    _param_delimiters = r' |,\s*|;\s*'
 
     def process_macros(self, content: str) -> str:
         '''Replace macros with content defined in the config.
