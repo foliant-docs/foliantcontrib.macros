@@ -20,17 +20,10 @@ class Preprocessor(BasePreprocessor):
         '''
 
         def _sub(macro):
-            options = self.get_options(macro.group('options'))
+            name = macro.group('body')
+            params = self.get_options(macro.group('options'))
 
-            name = options['name']
-
-            params = [
-                param
-                for param in re.split(self._param_delimiters, options.get('params', ''))
-                if param
-            ]
-
-            return self.options['macros'].get(name, '').format(*params)
+            return self.options['macros'].get(name, '').format_map(params)
 
         return self.pattern.sub(_sub, content)
 

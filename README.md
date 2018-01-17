@@ -1,6 +1,6 @@
 # Macros for Foliant
 
-*Macro* is a string with placeholders that is replaced with predefined content during documentation build. Macros are defined in the config and called by name.
+*Macro* is a string with placeholders that is replaced with predefined content during documentation build. Macros are defined in the config.
 
 
 ## Installation
@@ -12,14 +12,14 @@ $ pip install foliantcontrib.macros
 
 ## Config
 
-Enable the propressor by adding it to `preprocessors` and list your macros in `macros` dictionary:
+Enable the preprocessor by adding it to `preprocessors` and listing your macros in `macros` dictionary:
 
 ```yaml
 preprocessors:
   - macros:
-    macros:
-      foo: This is a macro definition.
-      bar: "This is macro with a parameter: {0}"
+      macros:
+        foo: This is a macro definition.
+        bar: "This is macro with a parameter: {0}"
 ```
 
 
@@ -34,10 +34,10 @@ preprocessors:
         support_number: "8 800 123-45-67"
 ```
 
-Now, everytime you need to insert your support phone number, you put a macro instead:
+Now, every time you need to insert your support phone number, you put a macro instead:
 
 ```markdown
-Call you support team: <<macro name="support_number"></macro>.
+Call you support team: <<macro>support_number</macro>.
 ```
 
 Macros are useful in documentation that should be built into multiple targets, e.g. site and pdf, when the same thing is done differently in one target than in the other.
@@ -60,7 +60,7 @@ This can be implemented using `<<if></if>` tag:
 Here is [another page](<if backends="pandoc">#another_page</if><if backends="mkdocs">another_page.md</if>).
 ```
 
-This bulky constract quickly get old when you use many cross-references in you documentation.
+This bulky construct quickly gets old when you use many cross-references in your documentation.
 
 To make your sources cleaner, move this construct to the config as a reusable macro:
 
@@ -74,5 +74,5 @@ preprocessors:
 And use it in the source:
 
 ```markdown
-Here is [another page](<macro name="ref" params="#another_page, another_page.md"</macro>).
+Here is [another page](<macro params="#another_page, another_page.md">ref</macro>).
 ```
