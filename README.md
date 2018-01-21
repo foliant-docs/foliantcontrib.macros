@@ -74,5 +74,5 @@ preprocessors:
 And use it in the source:
 
 ```markdown
-Here is [another page](<macro params="#another_page, another_page.md">ref</macro>).
+Here is [another page](<<macro params="#another_page, another_page.md">ref</macro>).
 ```
