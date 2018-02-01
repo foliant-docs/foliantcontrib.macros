@@ -7,3 +7,8 @@
 
 -   Switch from unnamed to named parameters.
 -   Macro name is now defined in the tag body instead of "name" option.
+
+
+# 1.0.3
+
+-   Add tag `<m>...</m>`.
