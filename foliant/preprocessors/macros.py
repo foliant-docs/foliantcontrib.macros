@@ -5,7 +5,7 @@ class Preprocessor(BasePreprocessor):
     defaults = {
         'macros': {}
     }
-    tags = 'macro',
+    tags = 'macro', 'm'
 
     def process_macros(self, content: str) -> str:
         '''Replace macros with content defined in the config.
