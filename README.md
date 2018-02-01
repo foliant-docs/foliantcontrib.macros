@@ -38,6 +38,8 @@ Now, every time you need to insert your support phone number, you put a macro in
 
 ```markdown
 Call you support team: <<macro>support_number</macro>.
+
+Here's the number again: <<m>support_number</m>.
 ```
 
 Macros are useful in documentation that should be built into multiple targets, e.g. site and pdf, when the same thing is done differently in one target than in the other.
