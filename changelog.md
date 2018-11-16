@@ -1,14 +1,16 @@
-# 1.0.1
+# 1.0.4
 
--   Preserve param case.
+-   Do not rewrite source Markdown file if an error occurs.
 
+# 1.0.3
+
+-   Add tag `<m>...</m>`.
 
 # 1.0.2
 
 -   Switch from unnamed to named parameters.
 -   Macro name is now defined in the tag body instead of "name" option.
 
+# 1.0.1
 
-# 1.0.3
-
--   Add tag `<m>...</m>`.
+-   Preserve param case.
