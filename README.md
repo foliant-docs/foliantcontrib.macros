@@ -1,3 +1,5 @@
+[![](https://img.shields.io/pypi/v/foliantcontrib.macros.svg)](https://pypi.org/project/foliantcontrib.macros/)  [![](https://img.shields.io/github/v/tag/foliant-docs/foliantcontrib.macros.svg?label=GitHub)](https://github.com/foliant-docs/foliantcontrib.macros)
+
 # Macros for Foliant
 
 *Macro* is a string with placeholders that is replaced with predefined content during documentation build. Macros are defined in the config.
@@ -19,7 +21,7 @@ preprocessors:
   - macros:
       macros:
         foo: This is a macro definition.
-        bar: "This is macro with a parameter: {0}"
+        bar: "This is macro with a parameter: {param}"
 ```
 
 
@@ -36,29 +38,48 @@ preprocessors:
 
 Now, every time you need to insert your support phone number, you put a macro instead:
 
-```markdown
+```html
 Call you support team: <<macro>support_number</macro>.
 
 Here's the number again: <<m>support_number</m>.
 ```
 
-Macros are useful in documentation that should be built into multiple targets, e.g. site and pdf, when the same thing is done differently in one target than in the other.
+Macros support params. This simple feature may make your sources a lot tidier:
+
+```yaml
+preprocessors:
+  - macros:
+      macros:
+        jira: "https://mycompany.jira.server.us/jira/ticket?ID={ticket_id}"
+```
+
+Now you don't need to remember the address of your Jira server if you want to reference a ticket:
+
+```html
+Link to jira ticket: <macro ticket_id="DOC-123">jira</macro>
+```
+
+## Realworld example
+
+You can combine Macros with tags by other Foliant preprocessors.
+
+This can useful in documentation that should be built into multiple targets, e.g. site and pdf, when the same thing is done differently in one target than in the other.
 
 For example, to reference a page in MkDocs, you just put the Markdown file in the link:
 
-```markdown
+```html
 Here is [another page](another_page.md).
 ```
 
 But when building documents with Pandoc all sources are flattened into a single Markdown, so you refer to different parts of the document by anchor links:
 
-```markdown
+```html
 Here is [another page](#another_page).
 ```
 
-This can be implemented using `<<if></if>` tag:
+This can be implemented using the [Flags](https://foliant-docs.github.io/docs/preprocessors/flags/) preprocessor and its `<<if></if>` tag:
 
-```markdown
+```html
 Here is [another page](<if backends="pandoc">#another_page</if><if backends="mkdocs">another_page.md</if>).
 ```
 
@@ -70,11 +91,14 @@ To make your sources cleaner, move this construct to the config as a reusable ma
 preprocessors:
   - macros:
       macros:
-        ref: <<if backends="pandoc">{0}</if><if backends="mkdocs">{1}</if>
+        ref: <<if backends="pandoc">{pandoc}</if><if backends="mkdocs">{mkdocs}</if>
+  - flags
 ```
 
 And use it in the source:
 
-```markdown
-Here is [another page](<<macro params="#another_page, another_page.md">ref</macro>).
+```html
+Here is [another page](<<macro pandoc="#another_page" mkdocs="another_page.md">ref</macro>).
 ```
+
+> Just remember, that in this use case `macros` preprocessor must go *before* `flags` preprocessor in the config. This way macros will be already resolved at the time `flags` starts working.
