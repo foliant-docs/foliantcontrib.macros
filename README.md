@@ -39,9 +39,9 @@ preprocessors:
 Now, every time you need to insert your support phone number, you put a macro instead:
 
 ```html
-Call you support team: <<macro>support_number</macro>.
+Call you support team: <macro>support_number</macro>.
 
-Here's the number again: <<m>support_number</m>.
+Here's the number again: <m>support_number</m>.
 ```
 
 Macros support params. This simple feature may make your sources a lot tidier:
@@ -77,7 +77,7 @@ But when building documents with Pandoc all sources are flattened into a single 
 Here is [another page](#another_page).
 ```
 
-This can be implemented using the [Flags](https://foliant-docs.github.io/docs/preprocessors/flags/) preprocessor and its `<<if></if>` tag:
+This can be implemented using the [Flags](https://foliant-docs.github.io/docs/preprocessors/flags/) preprocessor and its `<if></if>` tag:
 
 ```html
 Here is [another page](<if backends="pandoc">#another_page</if><if backends="mkdocs">another_page.md</if>).
@@ -91,14 +91,14 @@ To make your sources cleaner, move this construct to the config as a reusable ma
 preprocessors:
   - macros:
       macros:
-        ref: <<if backends="pandoc">{pandoc}</if><if backends="mkdocs">{mkdocs}</if>
+        ref: <if backends="pandoc">{pandoc}</if><if backends="mkdocs">{mkdocs}</if>
   - flags
 ```
 
 And use it in the source:
 
 ```html
-Here is [another page](<<macro pandoc="#another_page" mkdocs="another_page.md">ref</macro>).
+Here is [another page](<macro pandoc="#another_page" mkdocs="another_page.md">ref</macro>).
 ```
 
 > Just remember, that in this use case `macros` preprocessor must go *before* `flags` preprocessor in the config. This way macros will be already resolved at the time `flags` starts working.
