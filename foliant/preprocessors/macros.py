@@ -18,8 +18,11 @@ class Preprocessor(BasePreprocessor):
         def _sub(macro):
             name = macro.group('body')
             params = self.get_options(macro.group('options'))
-
-            return self.options['macros'].get(name, '').format_map(params)
+            try:
+                return self.options['macros'].get(name, '').format_map(params)
+            except AttributeError:
+                print(f'\nReplacement for `{name}` not found. Keeping original...')
+                return name
 
         return self.pattern.sub(_sub, content)
 

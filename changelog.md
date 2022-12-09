@@ -1,3 +1,9 @@
+# 1.0.5
+
+-   Do not fail preprocessors run if no replacement for a macro is found.
+
+    This case can occur if some undefined environment variable is passed to the macro.
+
 # 1.0.4
 
 -   Do not rewrite source Markdown file if an error occurs.
